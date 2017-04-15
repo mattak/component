@@ -1,4 +1,4 @@
-# Component
+![logo](./art/logo_horizontal_small.png)
 
 # Why?
 
