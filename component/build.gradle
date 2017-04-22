@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -7,4 +8,13 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
     }
+}
+
+publish {
+  userOrg = 'mattak'
+  groupId = 'me.mattak'
+  artifactId = 'component'
+  publishVersion = ext.publishVersion
+  desc = 'Android component pattern to minimize your activity/framgent'
+  website = 'https://github.com/mattak/component'
 }
