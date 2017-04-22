@@ -2,6 +2,8 @@ package me.mattak.component;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +33,7 @@ public class Components implements Component {
     }
 
     @Override
-    public void onComponentsAssigned(Components components) {
+    public void onComponentsAssigned(@NonNull Components components) {
         // assign this object component to derived component
         for (Component component : this.components) {
             component.onComponentsAssigned(components);
@@ -39,65 +41,69 @@ public class Components implements Component {
     }
 
     @Override
-    public void onCreate(Activity activity, Bundle savedInstanceState) {
+    public void onCreate(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
         for (Component component : this.components) {
             component.onCreate(activity, savedInstanceState);
         }
     }
 
     @Override
-    public void onStart(Activity activity) {
+    public void onStart(@NonNull Activity activity) {
         for (Component component : this.components) {
             component.onStart(activity);
         }
     }
 
     @Override
-    public void onRestart(Activity activity) {
+    public void onRestart(@NonNull Activity activity) {
         for (Component component : this.components) {
             component.onRestart(activity);
         }
     }
 
     @Override
-    public void onResume(Activity activity) {
+    public void onResume(@NonNull Activity activity) {
         for (Component component : this.components) {
             component.onResume(activity);
         }
     }
 
     @Override
-    public void onPause(Activity activity) {
+    public void onPause(@NonNull Activity activity) {
         for (Component component : this.components) {
             component.onPause(activity);
         }
     }
 
     @Override
-    public void onStop(Activity activity) {
+    public void onStop(@NonNull Activity activity) {
         for (Component component : this.components) {
             component.onStop(activity);
         }
     }
 
     @Override
-    public void onDestroy(Activity activity) {
+    public void onDestroy(@NonNull Activity activity) {
         for (Component component : this.components) {
             component.onDestroy(activity);
         }
     }
 
-    public <T extends Component> T getComponent(Class<T> clazz) {
-        if (this.components == null && this.components.length < 1) {
+    @Nullable
+    @SuppressWarnings("unchecked")
+    public <T extends Component> T getComponent(@NonNull Class<T> clazz) {
+        if (this.components == null || this.components.length < 1) {
             return null;
         }
         return (T) this.componentMap.get(clazz);
     }
 
-    public <T extends Component> List<T> getComponents(Class<T> clazz) {
+    @NonNull
+    @SuppressWarnings("unchecked")
+    public <T extends Component> List<T> getComponents(@NonNull Class<T> clazz) {
         List<T> list = new ArrayList<T>();
 
-        if (this.components == null && this.components.length < 1) {
+        if (this.components == null || this.components.length < 1) {
             return list;
         }
 

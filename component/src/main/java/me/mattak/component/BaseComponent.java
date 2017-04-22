@@ -2,6 +2,8 @@ package me.mattak.component;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -14,42 +16,45 @@ public class BaseComponent implements Component {
     private WeakReference<Components> components;
 
     @Override
-    public void onComponentsAssigned(Components components) {
+    public void onComponentsAssigned(@NonNull Components components) {
         this.components = new WeakReference<Components>(components);
     }
 
-    public <T extends Component> T getComponent(Class<T> clazz) {
+    @Nullable
+    public <T extends Component> T getComponent(@NonNull Class<T> clazz) {
         return this.components.get().getComponent(clazz);
     }
 
-    public <T extends Component> List<T> getComponents(Class<T> clazz) {
+    @NonNull
+    public <T extends Component> List<T> getComponents(@NonNull Class<T> clazz) {
         return this.components.get().getComponents(clazz);
     }
 
     @Override
-    public void onCreate(Activity activity, Bundle savedInstanceState) {
+    public void onCreate(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
     }
 
     @Override
-    public void onStart(Activity activity) {
+    public void onStart(@NonNull Activity activity) {
     }
 
     @Override
-    public void onRestart(Activity activity) {
-    } 
-    @Override
-    public void onResume(Activity activity) {
+    public void onRestart(@NonNull Activity activity) {
     }
 
     @Override
-    public void onPause(Activity activity) {
+    public void onResume(@NonNull Activity activity) {
     }
 
     @Override
-    public void onStop(Activity activity) {
+    public void onPause(@NonNull Activity activity) {
     }
 
     @Override
-    public void onDestroy(Activity activity) {
+    public void onStop(@NonNull Activity activity) {
+    }
+
+    @Override
+    public void onDestroy(@NonNull Activity activity) {
     }
 }

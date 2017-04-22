@@ -2,25 +2,27 @@ package me.mattak.component;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * Component
  * Created by mattak on 2017/03/19.
  */
 public interface Component {
-    void onComponentsAssigned(Components components);
+    void onComponentsAssigned(@NonNull Components components);
 
-    void onCreate(Activity activity, Bundle savedInstanceState);
+    void onCreate(@NonNull Activity activity, @Nullable Bundle savedInstanceState);
 
-    void onStart(Activity activity);
+    void onStart(@NonNull Activity activity);
 
-    void onRestart(Activity activity);
+    void onRestart(@NonNull Activity activity);
 
-    void onResume(Activity activity);
+    void onResume(@NonNull Activity activity);
 
-    void onPause(Activity activity);
+    void onPause(@NonNull Activity activity);
 
-    void onStop(Activity activity);
+    void onStop(@NonNull Activity activity);
 
-    void onDestroy(Activity activity);
+    void onDestroy(@NonNull Activity activity);
 }
