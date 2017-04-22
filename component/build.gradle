@@ -2,19 +2,23 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion COMPILE_SDK_VERSION
+    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
+        minSdkVersion MIN_SDK_VERSION
     }
+}
+
+dependencies {
+    compile "com.android.support:support-annotations:${SUPPORT_LIBRARY_VERSION}"
 }
 
 publish {
   userOrg = 'mattak'
   groupId = 'me.mattak'
   artifactId = 'component'
-  publishVersion = ext.publishVersion
+  publishVersion = PUBLISH_VERSION
   desc = 'Android component pattern to minimize your activity/framgent'
   website = 'https://github.com/mattak/component'
 }
