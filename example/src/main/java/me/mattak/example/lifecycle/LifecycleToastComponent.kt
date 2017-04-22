@@ -1,7 +1,9 @@
 package me.mattak.example.lifecycle
 
 import android.app.Activity
+import android.os.Bundle
 import android.widget.Toast
+import io.reactivex.disposables.Disposable
 import me.mattak.component.BaseComponent
 
 /**
@@ -9,14 +11,20 @@ import me.mattak.component.BaseComponent
  * Created by mattak on 2017/04/22.
  */
 class LifecycleToastComponent : BaseComponent() {
-    override fun onStart(activity: Activity) {
-        super.onStart(activity)
+    var disposable: Disposable? = null
+
+    override fun onCreate(activity: Activity, savedInstanceState: Bundle?) {
+        super.onCreate(activity, savedInstanceState)
 
         val lifecycle = this.getComponent(LifecycleComponent::class.java) ?: return
 
-        lifecycle.subject
-                .takeUntil { it -> it.equals(Lifecycle.onDestroy) }
+        this.disposable = lifecycle.subject
                 .filter { it -> it.equals(Lifecycle.onResume) }
                 .subscribe { it -> Toast.makeText(activity, "onResume called!!", Toast.LENGTH_SHORT).show() }
+    }
+
+    override fun onDestroy(activity: Activity) {
+        super.onDestroy(activity)
+        this.disposable?.dispose()
     }
 }
