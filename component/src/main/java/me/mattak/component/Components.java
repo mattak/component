@@ -14,14 +14,14 @@ import java.util.Map;
  * Components
  * Created by mattak on 2017/03/19.
  */
-public class Components implements Component {
+public class Components implements Component, ComponentGetter {
     private Component[] components;
     private Map<Class, Component> componentMap;
 
     public Components(Component... components) {
         this.components = components;
         this.componentMap = this.createMap(this.components);
-        this.onComponentsAssigned(this);
+        this.onComponentGetterAssigned(this);
     }
 
     private Map<Class, Component> createMap(Component[] components) {
@@ -33,10 +33,10 @@ public class Components implements Component {
     }
 
     @Override
-    public void onComponentsAssigned(@NonNull Components components) {
+    public void onComponentGetterAssigned(@NonNull ComponentGetter getter) {
         // assign this object component to derived component
         for (Component component : this.components) {
-            component.onComponentsAssigned(components);
+            component.onComponentGetterAssigned(getter);
         }
     }
 
@@ -51,13 +51,6 @@ public class Components implements Component {
     public void onStart(@NonNull Activity activity) {
         for (Component component : this.components) {
             component.onStart(activity);
-        }
-    }
-
-    @Override
-    public void onRestart(@NonNull Activity activity) {
-        for (Component component : this.components) {
-            component.onRestart(activity);
         }
     }
 

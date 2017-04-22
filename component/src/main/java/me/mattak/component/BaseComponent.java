@@ -12,22 +12,22 @@ import java.util.List;
  * BaseComponent
  * Created by mattak on 2017/03/19.
  */
-public class BaseComponent implements Component {
-    private WeakReference<Components> components;
+public class BaseComponent implements Component, ComponentGetter {
+    private WeakReference<ComponentGetter> getter;
 
     @Override
-    public void onComponentsAssigned(@NonNull Components components) {
-        this.components = new WeakReference<Components>(components);
+    public void onComponentGetterAssigned(@NonNull ComponentGetter getter) {
+        this.getter = new WeakReference<ComponentGetter>(getter);
     }
 
     @Nullable
     public <T extends Component> T getComponent(@NonNull Class<T> clazz) {
-        return this.components.get().getComponent(clazz);
+        return this.getter.get().getComponent(clazz);
     }
 
     @NonNull
     public <T extends Component> List<T> getComponents(@NonNull Class<T> clazz) {
-        return this.components.get().getComponents(clazz);
+        return this.getter.get().getComponents(clazz);
     }
 
     @Override
@@ -36,10 +36,6 @@ public class BaseComponent implements Component {
 
     @Override
     public void onStart(@NonNull Activity activity) {
-    }
-
-    @Override
-    public void onRestart(@NonNull Activity activity) {
     }
 
     @Override
