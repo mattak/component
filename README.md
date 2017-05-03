@@ -1,6 +1,6 @@
 ![logo](./art/logo_horizontal_small.png)
 
-Divide your Activity/Fragment life cycle logic into reusable small components.
+Divide your Android Activity/Fragment life cycle logic into reusable small components.
 
 # Why?
 
@@ -19,12 +19,12 @@ Component improves:
 - Tightly coupled logic in Activity.
 - Portability of life cycle related logic.
 
-Component helps you to divide application logic of Activity.
-Let's say goodbye to Fat Activity by appling this pattern.
+Component helps you divide application logic of Activity.
+Let's say goodbye to Fat Activity by component pattern.
 
 # Install
 
-please download from jcenter.
+Import from jcenter.
 
 ```
 compile "me.mattak:component:0.1.0"
@@ -68,7 +68,7 @@ class LogComponent : BaseComponent() {
 
 ## 2. List up your components
 
-List up order of component is the same of execution order.
+List up components. The order is the same of execution order.
 
 ```kotlin
 class AppComponents : Components(
